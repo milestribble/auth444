@@ -1,0 +1,34 @@
+{
+  "name": "auth444",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "db:create": "createdb auth444",
+    "db:drop": "dropdb auth444",
+    "db:schema": "psql auth444 < ./src/models/db/schema/schema.sql",
+    "db:reset": "npm run db:drop; npm run db:create && npm run db:schema",
+    "test:create": "createdb auth444_test",
+    "test:drop": "dropdb auth444_test",
+    "test:schema": "psql auth444_test < ./src/models/db/schema/schema.sql && psql auth444_test < ./src/models/db/schema/load-data.sql",
+    "test:reset": "npm run test:drop; npm run test:create && npm run test:schema",
+    "test": "npm run test:reset && NODE_ENV=test mocha test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "pg": "^7.3.0"
+  }
+}
