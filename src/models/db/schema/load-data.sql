@@ -20,3 +20,10 @@ VALUES
   (2, 2),
   (3, 2),
   (3, 1);
+
+INSERT INTO contacts
+  (name, phone)
+VALUES
+  ('John','444-666-8888'),
+  ('Jill','999-666-1111'),
+  ('Bill','444-777-8888');

@@ -4,15 +4,9 @@ const { query } = require('./client.js')
 //
 const assign = (userId, roleId) =>
   query(`INSERT INTO  user_roles
-         (user_id, role_id)
+          (user_id, role_id)
          VALUES
-         ($1, $2)`, [userId, roleId])
-
-
-const unassign = (userId, roleId) =>
-  query(`DELETE FROM user_roles
-         WHERE
-         user_id=$1 AND role_id=$2`, [userId, roleId])
+          ($1, $2)`, [userId, roleId])
 
 
 const getByUserId = (userId) =>
@@ -27,7 +21,6 @@ const getAll = () =>
 
 module.exports = {
   assign,
-  unassign,
   getByUserId,
   getAll
 }

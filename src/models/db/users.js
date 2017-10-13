@@ -14,5 +14,7 @@ const create = (username, encrypted_password) =>
 const getByUsername = (username) =>
   query(`SELECT * FROM users WHERE username=$1`, [username])
 
+const checkExists = (username) =>
+  query(`SELECT EXISTS (SELECT username FROM users WHERE LOWER(username)=$1)`, [username.toLowerCase()])
 
-module.exports = { create, getByUsername }
+module.exports = { create, getByUsername, checkExists }
