@@ -5,7 +5,7 @@ const create = (body) => {
   let username = body.username
   let password = body.password
 
-  if (!username || !password) throw new Error('Improper Signup Data')
+  // if (!username || !password) throw new Error('Improper Signup Data')
 
   return bcrypt.hash(password, 10)
     .then(encrypted_password =>
@@ -21,7 +21,7 @@ const create = (body) => {
     })
 }
 
-const exists = (username) => {
+const checkExists = (username) => {
   return users.checkExists(username)
   .then(result => result.rows[0].exists )
 }
@@ -40,6 +40,6 @@ const verifyPassword = (body) => {
 
 module.exports = {
   create,
-  exists,
+  checkExists,
   verifyPassword
 }

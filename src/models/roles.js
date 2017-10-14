@@ -2,7 +2,7 @@ const roles = require('./db/roles.js')
 // console.log(roles);
 
 
-const linkUser = (userInfo) => {
+const linkUser = (user) => {
   return roles.getAll()
     .then(results =>
       results.rows.reduce((acu,el)=>{
@@ -11,17 +11,31 @@ const linkUser = (userInfo) => {
       },{})
     )
     .then(roleMap => {
-      // console.log('userInfo: ',userInfo);
-      let assignments = userInfo['roles'].map( roleName => {
+      if(typeof user.roles === 'string') {
+        user.roles = Array(user.roles)
+      }
+      let assignments = user.roles.map( roleName => {
         let roleId = roleMap[roleName]
-        let userId = userInfo.id
+        console.log(roleId)
+        let userId = user.id
         return roles.assign(userId, roleId)
       })
-      return Promise.all(assignments).then(()=>userInfo)
+      return Promise.all(assignments).then(()=>user)
     })
-    
+
 }
 
+const getByUsername = (username) => {
+  return roles.getByUsername(username)
+    .then(results => {
+      let userRoles = results.rows.map(obj => obj.name)
+      let userInfo = results.rows[0]
+      return {id: userInfo.id, username: userInfo.username, roles: userRoles }
+    })
+
+    // .then(rows => return {id: . roles: , username})
+}
 module.exports = {
-  linkUser
+  linkUser,
+  getByUsername
 }

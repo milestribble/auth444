@@ -24,4 +24,4 @@ function query (statement, params) {
   })
 }
 
-module.exports = { query }
+module.exports = { pool, query }

@@ -29,7 +29,7 @@ describe('users#create', function() {
   })
 })
 
-describe(`users#getByUsername`, function() {
+describe(`DB users#getByUsername`, function() {
 
   it(`Returns the encrypted password for a given username`, function() {
     return users.getByUsername('John')
@@ -41,10 +41,10 @@ describe(`users#getByUsername`, function() {
 
 })
 
-describe(`roles#getByUserId`, function() {
+describe(`roles#getByUsername`, function() {
 
   it('Gets role for a user with only one role', function () {
-    return roles.getByUserId(1)
+    return roles.getByUsername('miles')
     .then(result => {
       let realRoles = result.rows.map((obj) => obj.name)
       expect(realRoles).to.include('regular')
@@ -52,7 +52,7 @@ describe(`roles#getByUserId`, function() {
   })
 
   it('Gets roles for a user with many roles', function () {
-    return roles.getByUserId(3)
+    return roles.getByUsername('john')
     .then(result => {
       let realRoles = result.rows.map((obj) => obj.name)
       expect(realRoles).to.include('regular', 'admin')
@@ -148,7 +148,7 @@ describe(`roles#assign`, function() {
 describe(`roles#getByUserId`, function() {
 
   it(`Returns an array of rows`, function() {
-    return roles.getByUserId(3)
+    return roles.getByUsername('john')
     .then(results => {
       let roles = results.rows.map(obj => obj.name)
       expect(roles.length).to.equal(2)

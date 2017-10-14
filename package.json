@@ -2,11 +2,12 @@
   "name": "auth444",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "start": "nodemon",
     "db:create": "createdb auth444",
     "db:drop": "dropdb auth444",
     "db:schema": "psql auth444 < ./src/models/db/schema/schema.sql",
@@ -26,6 +27,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "connect-pg-simple": "^4.2.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
